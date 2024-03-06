@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: echoserver-v2-secure
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+spec:
+  rules:
+    - host: echo.eternalamit5.com
+      http:
+        paths:
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+                name: echoserver-v2-secure
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+        - echo.eternalamit5.com
+      secretName: echo-eternalamit5-com

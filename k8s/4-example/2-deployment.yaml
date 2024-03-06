@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echoserver-v2-secure
+spec:
+  selector:
+    matchLabels:
+      app: echoserver-v2-secure
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: echoserver-v2-secure
+    spec:
+      containers:
+        - image: gcr.io/google-containers/echoserver:2.5
+          name: echoserver-v2-secure
+          ports:
+            - containerPort: 8080
